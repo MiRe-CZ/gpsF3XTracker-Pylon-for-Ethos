@@ -63,7 +63,7 @@ Note: upgrade from a previous program version can be done simply by replacing of
 
 - For individual telemetry units:
 	- RCGPS-F3x: use firmware 0.0.3d or newer. Create a DIY sensor "GPS Sats" with Application ID is 0x5111. Sensors coordinates, speed and satellites are supported
-	- SM-Modelbau GPS-Logger 3: be careful – due to error in the Logger firmware v1.31 will Ethos wrongly recognize a sensor with Application ID 0x0860 and with name "GPS Satellites". It is needed to delete such sensor and create a new DIY sensor with Application ID 0x0870! Sensors coordinates, speed and satellites are supported
+	- SM-Modelbau GPS-Logger 3: be careful – due to error in the Logger firmware v1.31 will Ethos wrongly recognize a sensor with Application ID 0x0860 and with name "GPS Satellites". It is needed to delete such sensor and create a new DIY sensor with Application ID 0x0870! It is probably corrected in the firmware v1.32, published on 23.01.2026. Sensors coordinates, speed and satellites are supported
 	- FrSky GPS ADV: Sensors coordinates and speed are supported
 	- Other GPS: Sensors coordinates and speed are supported
 
