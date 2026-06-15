@@ -1,3 +1,5 @@
+Do you fly also slope races (F3F)? Then try the GPS F3X Tracker for Ethos! See https://github.com/MiRe-CZ/gpsF3XTracker-for-Ethos
+
 # GPS F3X Tracker Pylon-racing for Ethos Version 1.0
 
 ### Installation guide and user manual
@@ -73,7 +75,7 @@ Note: not needed other telemetry values should be disabled in Ethos to speed up 
 	- Event place: any item from list of places in locations.lua file
 	- Course direction:
 
-    a) 2-pylon: course bearing from the pylon 2 to the pylon 1 in degrees. Take direction by a compass from the pylon 2 to the pylon 1, e.g. 90° if the course direction is exactly East → West*
+    a) 2-pylon: course bearing from the pylon 2 to the pylon 1 in degrees. Take direction by a compass from the pylon 2 to the pylon 1, e.g. 90° if the course direction is exactly East → West (*)
     <img width="340" height="116" alt="image" src="https://github.com/user-attachments/assets/c065f85b-59c1-4ee6-937e-6530693943f9" />
  
     b) 3-pylon: course bearing from center of line between pylons 2 and 3 and pylon 1
@@ -89,7 +91,7 @@ Note: not needed other telemetry values should be disabled in Ethos to speed up 
 
 	(*) These items are available only for "Live Position & Direction event", otherwise are locked as they are determined by event information from locations.lua file
 
-	(**) Switch has to keep “high” value for permanent locking the GPS Home position, a 	momentary switch is not suitable. If a functional switch should be used, it must be 	configured as status switch
+	(**) Switch has to keep “high” value for permanent locking the GPS Home position, a momentary switch is not suitable. If a functional switch should be used, it must be	configured as status switch
 
 <img width="434" height="218" alt="image" src="https://github.com/user-attachments/assets/d955a2eb-6356-472e-b6cd-09184e002859" />
 <img width="437" height="95" alt="image" src="https://github.com/user-attachments/assets/92e80922-43e8-491b-b2b9-f40d761e6af3" />
@@ -161,7 +163,7 @@ The actual status is indicated by individual rows in the "GPS Pylon Tracker" wid
 Announcements and sounds: 
 - Beep after switching the "Start race switch" on (600 Hz)
 - Beep when crossing pylons plane from inside to outside (1000 Hz)
-- Beep when crossing a Start/Finish line from left to right (1400 Hz)
+- Beep when crossing the Start/Finish line from left to right in the last lap (1400 Hz)
 - Lap time announcements
 - Overall runtime at event end for F3F-x event types
 
