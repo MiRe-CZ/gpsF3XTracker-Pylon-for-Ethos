@@ -1,6 +1,6 @@
 Do you fly also slope races (F3F)? Then try the GPS F3X Tracker for Ethos! See https://github.com/MiRe-CZ/gpsF3XTracker-for-Ethos
 
-# GPS F3X Tracker Pylon-racing for Ethos Version 1.0
+# GPS F3X Tracker Pylon-racing for Ethos Version 1.1
 
 ### Installation guide and user manual
 
@@ -164,7 +164,7 @@ Announcements and sounds:
 - Beep after switching the "Start race switch" on (600 Hz)
 - Beep when crossing pylons plane from inside to outside (1000 Hz)
 - Beep when crossing the Start/Finish line from left to right in the last lap (1400 Hz)
-- Lap time announcements
+- Lap number announcements
 - Overall runtime at event end for F3F-x event types
 
 <a name="Usageonasite"></a>
@@ -253,7 +253,7 @@ Notes:
 <a name="Changelog"></a>
 ## 12. Change log
 V1.1:
-- 
+- only lap number without lap time is announced to mitigate delay in indication of reaching pylon 1
 
 <a name="Developmentplan"></a>
 ## 13. Development plan
