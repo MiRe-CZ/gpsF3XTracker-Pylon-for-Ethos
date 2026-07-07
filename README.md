@@ -22,7 +22,7 @@ Do you fly also slope races (F3F)? Then try the GPS F3X Tracker for Ethos! See h
 
 <a name="GeneralDescription"></a>
 ## 1. General Description
-GPS F3X Tracker Pylon-racing for Ethos is the LUA application for FrSky transmitters with Ethos operating system. It supports training of pylon racing events (F3D, F3E, F3R). Whole competition event is supported, beginning with start initiated by the Start race switch and counting and time measuring of preconfigured number of legs. Via a GPS sensor the turn lines are identified and an acoustic signal is given while crossing them. A supported GPS sensor must be placed in the model and connected and configured to telemetry subsystem.
+GPS F3X Tracker Pylon-racing for Ethos is the LUA application for FrSky transmitters with Ethos operating system. It supports training of pylon racing events (FAI F3D, F3E, F3R, F3T, some other national classes, e.g. EF1, E2K, ...). Whole competition event is supported, beginning with start initiated by the Start race switch and counting and time measuring of preconfigured number of legs. Via a GPS sensor the turn lines are identified and an acoustic signal is given while crossing them. A supported GPS sensor must be placed in the model and connected and configured to telemetry subsystem.
 
 The application is based on the GPS F3X(F3F/F3B) Tracker for Ethos. Its code is published under the MIT License.
 
