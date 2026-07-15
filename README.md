@@ -1,6 +1,6 @@
 Do you fly also slope races (F3F)? Then try the GPS F3X Tracker for Ethos! See https://github.com/MiRe-CZ/gpsF3XTracker-for-Ethos
 
-# GPS F3X Tracker Pylon-racing for Ethos Version 1.1
+# GPS F3X Tracker Pylon-racing for Ethos Version 1.2
 
 ### Installation guide and user manual
 
@@ -22,7 +22,7 @@ Do you fly also slope races (F3F)? Then try the GPS F3X Tracker for Ethos! See h
 
 <a name="GeneralDescription"></a>
 ## 1. General Description
-GPS F3X Tracker Pylon-racing for Ethos is the LUA application for FrSky transmitters with Ethos operating system. It supports training of pylon racing events (FAI F3D, F3E, F3R, F3T, some other national classes, e.g. EF1, E2K, ...). Whole competition event is supported, beginning with start initiated by the Start race switch and counting and time measuring of preconfigured number of legs. Via a GPS sensor the turn lines are identified and an acoustic signal is given while crossing them. A supported GPS sensor must be placed in the model and connected and configured to telemetry subsystem.
+GPS F3X Tracker Pylon-racing for Ethos is the LUA application for FrSky and Kavan transmitters with Ethos operating system. It supports training of pylon racing events (FAI F3D, F3E, F3R, F3T, some other national classes, e.g. EF1, E2K, ...) on the standard 3 pylon courses but also on simple 2 pylon ones. Whole competition event is supported, beginning with start initiated by the Start race switch or by crossing over the start/finish line and counting and time measuring of preconfigured number of legs. Via a GPS sensor the turn lines are identified and an acoustic signal is given while crossing them. A supported GPS sensor must be placed in the model and connected and configured to telemetry subsystem.
 
 The application is based on the GPS F3X(F3F/F3B) Tracker for Ethos. Its code is published under the MIT License.
 
@@ -37,22 +37,22 @@ This manual describes how to install, configure and use the GPS F3X Tracker Pylo
 <a name="Knownlimitations"></a>
 ## 3. Known limitations
 - Due to accuracy of GPS sensors (e.g. FrSky GPS ADV has horizontal accuracy approx 2.5m CEP, RCGPS-F3x 1.5 m CEP with SBAS) and telemetry latency the turn signals are not 100% precise, but still give a good F3X pylon-racing training experience. Moreover due to extreme acceleration in curves, which can achieve much above 4G assured for reliable GPS sensor operation, sensors can experience temporary satellite signal lock loss
-- Sometimes there is a GPS-drift of given start point. In this case the whole course might drift to left or right some meters, because the turn positions are calculated in relation to the start point
+- Sometimes there is a GPS-drift of given start point. In this case the whole course might drift to left/right or up/down some meters, because the turn positions are calculated in relation to the start point. This is especially important for start initiated by crossing  over the start/finish line
 - Max 14 fully defined and one "live" event sites are supported
 - Application texts and menus are only in English. Speech announcements are given in language configured in the transmitter
 - Application is resource demanding. There should not be many other widgets/system tools/tasks/sources running on transmitter otherwise accuracy of application can be compromised. It is valid also vice versa, so other applications can be affected by the GPS F3X Tracker
-- Currently the Tracker supports only courses with 2 pylons
+- For the sake of program speed, there is no check for 3 pylon courses if a plane is flying from pylon 1 to pylon 2 and not from pylon 1 to pylon 3, because it is easily detectable mistake
 
 <a name="Installation"></a>
 ## 4. Installation
 Unzip the installation package gpstracko.X.x.zip, downloaded from the repository (Releases gpsF3XTracker-Pylon-for-Ethos), and place all files into directory /SCRIPTS on your transmitter. Folders gpstraca (keeping setup part) and gpstrack (keeping operation part) should not be changed. Please note all modules, excluding locations.lua, are in the compiled form (*.luac).
 Start the transmitter and configure two widgets "GPS Pylon Tracker Setup" and "GPS Pylon Tracker" when a target model is selected. The application is capable to partly modify size of text to size of widget windows, however, for accommodation of all information properly it is recommended to use at least half height & full wide layout for both setup and main widget (in such case widget titles should be switched off), or full height & half wide layout:
 
-<img width="434" height="206" alt="image" src="https://github.com/user-attachments/assets/c9a4b177-bd80-41db-91c7-f67cbe5cda34" />
+<img width="342" height="162" alt="image" src="https://github.com/user-attachments/assets/db6e35e2-72e8-4346-b226-d969744e0cf6" />
 
-<img width="435" height="187" alt="image" src="https://github.com/user-attachments/assets/33fb4113-139d-4eea-b85e-43da16280ef6" />
+<img width="343" height="158" alt="image" src="https://github.com/user-attachments/assets/02560e36-e51d-42f8-9927-0d27e0576522" />
 
-Note: upgrade from a previous program version can be done simply by replacing of all program modules by new ones. It is strongly suggested to delete both widgets first and create them after replacement, checking and setting back all configuration items.
+Note: upgrade from a previous program version can be done simply by replacing of all program modules by new ones.  To mitigate potential run errors, it is strongly suggested to delete both widgets first and recreate them after replacement, checking and setting back all configuration items.
 
 <a name="Configuration"></a>
 ## 5. Configuration
@@ -83,17 +83,21 @@ Note: not needed other telemetry values should be disabled in Ethos to speed up 
 
     Standard distances: B=40m, C=30m, D=20m, E=180m
      
-	- Course difference: change of standard 180m course length <-100, +100> (*)
-	- Competition type: any type from supported types (2-pylon_training, 3-pylon_training, 2-pylon_debug) (*)
+	- Course length difference: change of standard 180m course length <-100, +100> (*)
+ 	- Course runs: number of course laps	
+	- Competition type: any type from supported types (2-pylon_training, 3-pylon_training, 2-pylon_debug, 3-pylon_debug) (*)
+ 	- Start type: type of event timer initiation, Start race switch or Start/finish line (**)
  	- GPS sensor: any item from list of supported units
-	- Lock GPS Home position switch: any 2-position switch, physical or logical, or any other source with range <-100, +100>, mandatory (**)
+	- Lock GPS Home position switch: any 2-position switch, physical or logical, or any other source with range <-100, +100>, mandatory (***)
  	- Course direction difference management: source for real-time change of course direction, not mandatory, see chapter 11
 
-	(*) These items are available only for "Live Position & Direction event", otherwise are locked as they are determined by event information from locations.lua file
+(*) These items are available only for "Live Position & Direction event", otherwise are locked as they are determined by event information from locations.lua file
 
-	(**) Switch has to keep “high” value for permanent locking the GPS Home position, a momentary switch is not suitable. If a functional switch should be used, it must be	configured as status switch
+(**) If the Start type configuration switch = “Start race switch”, the event timer starts immediately after the Start race switch is activated. If the Start type configuration switch = “Start/finish line” a new event starts by activation of the Start race switch, but the Tracker starts the event timer only when the plane goes first outside of the course (behind pylon 2 for 2-pylon course, behind both pylon 2 and 3 for 3-pylon course) and then it crosses the start/finish line from left to right.
 
-<img width="434" height="218" alt="image" src="https://github.com/user-attachments/assets/d955a2eb-6356-472e-b6cd-09184e002859" />
+(***) Switch has to keep “high” value for permanent locking the GPS Home position, a momentary switch is not suitable. If a functional switch should be used, it must be	configured as status switch
+
+<img width="427" height="222" alt="image" src="https://github.com/user-attachments/assets/8432f096-509f-4c7c-9558-44847a887b90" />
 <img width="437" height="95" alt="image" src="https://github.com/user-attachments/assets/92e80922-43e8-491b-b2b9-f40d761e6af3" />
 
 - "GPS Pylon Tracker" widget configuration:
@@ -105,7 +109,7 @@ Note: not needed other telemetry values should be disabled in Ethos to speed up 
 
   (*) Switch can be state or momentary
   
-<img width="392" height="197" alt="image" src="https://github.com/user-attachments/assets/97e3e55b-4090-4172-bcd6-1db49781221b" />
+<img width="425" height="215" alt="image" src="https://github.com/user-attachments/assets/c5748ca6-d779-481a-9ae9-d0752358e654" />
 
 <a name="Locations.lua"></a>
 ## 6. Locations.lua
@@ -113,19 +117,21 @@ File Locations.lua, located in "/scripts/gpstrack/gpstrack" folder, keeps event 
 - type 1: 2-pylon training 
 - type 2: 3-pylon competition
 - type 3: 2-pylon debug
+- type 4: 3-pylon debug
 
 Default Location.lua looks like below. You can edit it as per your needs, but please do not delete the first row, which defines "live" event location. Default event type in such case is f3f training (type 1), however you can change it during configuration. Home position for “live” event location is defined from current GPS information. Please do not remove the last entry either (create new sites before that item) and keep its name "Last Entry". Max 15 event sites are supported:
 
-    {name = "Live Position & Direction", lat = 0.0, lon = 0.0, dir = 0.0, dif = 0, runs = 0, comp = 1}
-    {name = "Debug", lat = 53.550707, lon = 9.923472,dir = 9.0, dif = 0, runs = 5, comp = 3},
-    {name = "Test 2-pylon", lat = 31.212000, lon = 121.400000, dir =   0.2, dif = -50, runs = 10, comp = 1},
-    {name = "Test 3-pylon", lat = 47.701974, lon = 8.3558498, dir = 152.0, dif = 0, runs = 10, comp = 2},
+    {name = "Live Position & Direction", lat = 0.0, lon = 0.0, dir = 0.0, dif = 0, runs = 10, comp = 1}
+    {name = "2-pylon Debug", lat =  0.0000000, lon =  0.0000000, dir =   0.0, dif = 0, runs = 5, comp = 3},
+    {name = "3-pylon Debug", lat = 0.0, lon = 0.0, dir = 0.0, dif = 0,runs = 5, comp = 4},
+    {name = "Site1 2-pylon training", lat = 31.2119998, lon = 121.4000015, dir = 100.8, dif = -41, runs = 9, comp = 1},  
+    {name = "Site2 3-pylon training", lat = 47.7019729, lon =  8.3558502, dir = 153.0, dif = 0, runs = 10, comp = 2},
     {name = "Last Entry", lat = 0.0, lon = 0.0, dir = 0.0, dif = 0, runs = 10, comp = 1}
 
 Notes:
 - home latitude and longitude is for 2-pylon events center of the course (on start/finish line)
-- home latitude and longitude is for 3-pylon events position of center between pylon 2 and 3 (TBD)
-- course length of competition event types is defined as per F3X rules - 180m. You can change this default course length for a particular event site via item “dif” if needed – course is longer when value is positive and course is shorter when value is negative. It is not possible to change distance between pylons 2 and 3 for 3-pylon events. 2-pylon debug has its course length set internally to 30m
+- home latitude and longitude is for 3-pylon events position of center of the start/finish line. It is crucial to set it exactly at the center of the line!
+- course length of competition event types is defined as per F3X rules - 180m. You can change this default course length for a particular event site via item “dif” if needed – course is longer when value is positive and course is shorter when value is negative. It is not possible to change distance between pylons 2 and 3 for 3-pylon events. Debug item have their course length set internally to 80m
 - purpose of the "Live Position & Direction" event place is generally to test&try a new site and tune course parameters. If the site looks suitable and you expect to fly there more, it is necessary to create for it a new record in the Locations.lua (via Edit function) - all course parameters are then recorded. Otherwise the Tracker takes course direction, course length difference and competition type from the “Live Position & Direction” record in the Locations.lua, where by default is 'dir = 0.0, dif = 0, comp = 1' !
 
 You can edit the Location.lua file on a PC or edit individual records via embedded editor. Use button “Edit event place” on the site configuration screen to enter the editor. The original screen will be replaced by a new screen allowing editing of all parameters:
@@ -144,15 +150,16 @@ Note: deletion of site lines in the Locations table and edition of parameters fo
 <a name="Eventmodes"></a>
 ## 7. Event modes
 The application supports 2-pylon_training, 3-pylon_training, 2-pylon_debug event types. They behave differently as below:
-- 2-pylon_training: it follows F3D rules, however only with 2 pylons. The run timer is started by a pilot via the Start race switch. Time is then measured for individual concluded laps and for whole training event
-- 3-pylon_training: it follows F3D rules fully. Time is then measured for individual concluded laps and for whole training event
+- 2-pylon_training: it follows F3D rules, however only with 2 pylons. The run timer is started by a pilot via the Start race switch or by crossing the start/finish line, depending on the Start type switch. Time is then measured for individual concluded laps (visible only on display) and for whole training event (announced and visible on display when event is concluded)
+- 3-pylon_training: it follows F3D rules fully. Time is measured and announced as above
 - 2-pylon_debug: similar to 2-pylon_training, however it uses emulation of GPS input (via configured sources “Input debug GPS latitude and longitude”) for simulation of flight
+- 3-pylon_debug: as above, but for course with 3 pylons
 
 The actual status is indicated by individual rows in the "GPS Pylon Tracker" widget screen:
 - Comp factor:  defines value for correction of flight position, 0 = no correction
 - Comp: “waiting for start…”, "started…" - just after switching the “Start race switch” on, "canceled…" - cancellation can be done by switching off/on/off of the “Start race switch”; information about concluded laps
 - Runtime: time used for individual event
-- Course: "center", "leftOutside", "leftInside", "rightOutside", "rightInside" - distance from the center is provided
+- Course: "center", "leftOutside", "leftOutsideUp", "leftOutsideDown", "leftInside", "rightOutside", "rightInside" - distance from the center is provided
 - Spd, Dst: speed, distance from the center
 - GPS: actual GPS position
 - Runs: list of last events of the same type with their runtime
@@ -162,31 +169,34 @@ The actual status is indicated by individual rows in the "GPS Pylon Tracker" wid
 
 Announcements and sounds: 
 - Beep after switching the "Start race switch" on (600 Hz)
-- Beep when crossing pylons plane from inside to outside (1000 Hz)
+- Beep when crossing start/finish line from left to right (800 Hz) – only for events configured with Start type = Start/finish line
+- Beep when crossing pylons plane(s) from inside to outside (1000 Hz)
 - Beep when crossing the Start/Finish line from left to right in the last lap (1400 Hz)
 - Lap number announcements
-- Overall runtime at event end for F3F-x event types
+- Overall runtime at event end
 
 <a name="Usageonasite"></a>
 ## 8. Usage on a site
 - Switch on RC system and give the GPS sensor enough time for initiation and satellite detection - it can take 60+ seconds! For example for GPS-Logger 3 please wait till the orange LED is off and the green LED glows permanently or flashes. Open “GPS Pylon Tracker Setup” widget and select “Live Position & Direction” event place or any pre-configured place.
 - For "Live Position & Direction event place":
 	- Set "Competition type" configuration items if needed
-	- Go with your model to the home of the course (for 2-pylon events it is center of the course (on start/finish line),  for 3-pylon events it is center of line between pylons 2 and 3)
+ 	- Set “Start type” configuration item if needed
+	- Go with your model to the home of the course (for 2-pylon events it is center of the course = start/finish line,  for 3-pylon events it is center of start/finish line)
 	- Wait for stable information in the "GPS" row in the "GPS Pylon Tracker Setup" widget screen
  	- Take direction by a compass (2-pylon: course direction from the pylon 2 to the pylon 1 in degrees, 3-pylon: course direction from center of line between pylons 2 and 3 and pylon 1) and set it to the “Course direction” item (e.g. 90° if the course direction is exactly East → West)
 	- Lock the position with the "Lock GPS Home position switch" - such status will be indicated by change of item name to "GPS Home lck" 
 	- Now your flight configuration is ready, you can go to start
 
 - For other event places (pre-configured in the Location.lua file):
-	-Your flight configuration is ready - all parameters are set in the Location.lua file
+	- Set “Start type” configuration item if needed
+ 	- Your flight configuration is ready - all parameters are set in the Location.lua file
 
 - Go to the "GPS Pylon Tracker" widget screen
 	- The initial status is indicated by statement "waiting for start..." 
 
 <img width="216" height="110" alt="image" src="https://github.com/user-attachments/assets/998782e4-41fe-4304-9ca7-b39dff16a9aa" />
 
-- Start new event with the "Start race switch"
+- Start new event with the “Start race switch”. The timer will start depending on the “Start type” configuration item. If the Start type configuration switch = “Start race switch”, the event timer starts immediately after the Start race switch is activated. If the Start type configuration switch = “Start/finish line” a new event starts by activation of the Start race switch, but the Tracker starts the event timer only when the plane goes first outside of the course (behind pylon 2 for 2-pylon course, behind both pylon 2 and 3 for 3-pylon course) and then it crosses the start/finish line from left to right.
 
 <a name="Logging"></a>
 ## 9. Logging
@@ -200,7 +210,7 @@ Next rows have format as below, where:
 
 _comp.state, GPS:  latitude, longitude, Dist2home, Dir2home, Course distance, Speed, Sats_
 
-- comp.state: provides information about current flight stage (20 – start competition timer, 25 – waiting for plane crossing right base from inside, 27 – waiting for plane crossing left base from inside, 28 – waiting for plane crossing start/finish line from left to right, 30 – end of event)
+- comp.state: provides information about current flight stage: (2-pylon: 15 – waiting for plane crossing start/finish line from left to right,20 – start competition timer, 25 – waiting for plane crossing right base from inside, 27 – waiting for plane crossing left base from inside, 28 – waiting for plane crossing start/finish line from left to right, 30 – end of event / 3-pylon: 15 – waiting for plane crossing start/finish line from left to right, 20 – start competition timer, 25 – waiting for plane crossing right base from inside, 26 - waiting for plane crossing left&up base from inside, 27 – waiting for plane crossing left&down base from up, 28 – waiting for plane crossing start/finish line from left to right, 30 – end of event)
 - GPS: gives current position of the plane
 - Dist2home: gives current distance between the plane and home point (center of the course) in meters (negative value means the plane is on the left from the home point, positive value means the plane is on the right)
 - Dir2home: gives current angle between the plane and home point in rads
@@ -254,12 +264,12 @@ Notes:
 ## 12. Change log
 V1.1:
 - only lap number without lap time is announced to mitigate delay in indication of reaching pylon 1
+V1.2:
+- support of standard 3 pylon courses
+- support of start sequence initiated by the Start race switch or by crossing the start/finish line
 
 <a name="Developmentplan"></a>
 ## 13. Development plan
-At this moment we plan:
-    a) Implement support for 3-pylon scenario
-
 It is probable there will be necessary to change or enhance some parts. Do not hesitate to comment and come with ideas, preferably via an Issue in the GitHub repository (New issue gpsF3XTracker-Pylon-for-Ethos)
 
 <a name="License"></a>
