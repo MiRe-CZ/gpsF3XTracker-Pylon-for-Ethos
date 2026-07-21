@@ -264,6 +264,7 @@ Notes:
 ## 12. Change log
 V1.1:
 - only lap number without lap time is announced to mitigate delay in indication of reaching pylon 1
+
 V1.2:
 - support of standard 3 pylon courses
 - support of start sequence initiated by the Start race switch or by crossing the start/finish line
