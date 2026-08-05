@@ -1,5 +1,5 @@
 Do you fly also slope races (F3F)? Then try the GPS F3X Tracker for Ethos! See https://github.com/MiRe-CZ/gpsF3XTracker-for-Ethos
-# 3-pylon scenario hasn't been tested thoroughly yet!
+### 3-pylon scenario hasn't been tested thoroughly yet!
 
 # GPS F3X Tracker Pylon-racing for Ethos Version 1.2
 
